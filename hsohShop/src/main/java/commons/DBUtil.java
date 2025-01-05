@@ -13,9 +13,9 @@ public class DBUtil {
 		System.out.println("[debug] mariadb 등록 확인!");
 		
 		// maria db 접속
-		String url = "jdbc:mariadb://172.30.1.62:3306/shop";
+		String url = "jdbc:mariadb://127.0.01:3306/shop";
 		String id = "root";
-		String pw = "1004";
+		String pw = "1234";
 		Connection conn = DriverManager.getConnection(url, id, pw);
 				
 		return conn;

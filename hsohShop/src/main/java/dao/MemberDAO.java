@@ -62,7 +62,7 @@ public class MemberDAO {
 
         // 쿼리문 생성
         String sql = "SELECT A.MEMB_NO AS membNo, A.MEMB_ID AS membId, A.MEMB_PW AS membPw, A.MEMB_NAME AS membName, A.MEMB_AGE AS membAge, A.MEMB_SEX AS membSex, A.MEMB_LEVEL AS membLevel, A.INSERT_DATE AS insertDate, A.MODIFY_DATE AS modifyDate, A.INSERT_ID AS insertId, A.MODIFY_ID AS modifyId "
-                + "FROM MEMBER WHERE A.MEMB_ID=? AND A.MEMB_PW=?";
+                + "FROM MEMBER A WHERE A.MEMB_ID=? AND A.MEMB_PW=?";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, member.getMembId());
         stmt.setString(2, member.getMembPw());

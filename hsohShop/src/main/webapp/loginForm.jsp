@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import = "vo.*"%>
+<%@ page import = "vo.*" %>
 
 <%
     // 한글 깨짐 방지
@@ -12,7 +12,7 @@
         
         // 상대주소 표기
         response.sendRedirect(request.getContextPath() + "/index.jsp");
-        return false;
+        return;
     }
 %>
 

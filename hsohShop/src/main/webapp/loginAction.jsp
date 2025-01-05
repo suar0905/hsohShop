@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="vo.*"%>
-<%@ page import="dao.*"%>
+<%@ page import="vo.*" %>
+<%@ page import="dao.*" %>
 
 <%
     //한글 깨짐 방지
@@ -13,7 +13,7 @@
         
         // 상대주소 표기
         response.sendRedirect(request.getContextPath() + "/index.jsp");
-        return false;
+        return;
     }
 
     // loginForm.jsp 파라미터 가져옴
@@ -36,7 +36,7 @@
     if (returnMemb == null) {
         System.out.println("로그인 실패!!!");
         response.sendRedirect(request.getContextPath() + "/loginForm.jsp");
-        return false;
+        return;
     } else {
         System.out.println("로그인 성공!!!");
         response.sendRedirect(request.getContextPath() + "/index.jsp");
