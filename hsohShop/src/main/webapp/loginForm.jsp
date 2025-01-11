@@ -22,6 +22,8 @@
 <meta charset="UTF-8">
 <title>로그인 페이지</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
 </head>
 <body>
     <!-- 페이지 상단 메인메뉴 세팅 -->
@@ -29,28 +31,31 @@
         <jsp:include page="/partial/mainMenu.jsp"></jsp:include>
     </div>
     
-    <h1>* 로그인 페이지 *</h1>
     
-    <form id="loginForm" action="<%=request.getContextPath()%>/loginAction.jsp" method="post">
-        <div>
-            회원 아이디 :
-            <input type="text" name="membId" id="membId">
-        </div>
-        
-        <div>
-            회원 비밀번호 :
-            <input type="text" name="membPw" id="membPw">
-        </div>
-        
-        <br>
-        
-        <div>
-            <input type="button" name="loginBtn" id="loginBtn" value="로그인">
-            <input type="reset" value="초기화">
-            <input type="button" value="뒤로가기" onclick="history.back();">
-        </div>
-    </form>
-    
+    <div class="container-sm text-center">
+	    <h1>* 로그인 페이지 *</h1>
+    	<div class="jumbotron">
+		    <form id="loginForm" action="<%=request.getContextPath()%>/loginAction.jsp" method="post">
+		        <div class="form-floating mb-3">
+		        	<input type="text" class="form-control" name="membId" id="membId" placeholder="ID">
+  					<label for="floatingInput">회원 아이디</label>
+		        </div>
+		        
+		        <div class="form-floating">
+		        	<input type="text" class="form-control" name="membPw" id="membPw" placeholder="Password">
+  					<label for="floatingPassword">회원 비밀번호</label>
+		        </div>
+		        
+		        <br>
+		        
+		        <div>
+		            <input type="button" name="loginBtn" id="loginBtn" value="로그인" class="btn btn-outline-secondary">
+		            <input type="reset" value="초기화" class="btn btn-outline-danger">
+		            <input type="button" value="뒤로가기" onclick="history.back();" class="btn btn-outline-secondary">
+		        </div>
+		    </form>
+	    </div>
+    </div>
     
     
     <script>

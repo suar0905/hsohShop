@@ -12,7 +12,6 @@
 <body>
     <%
         Member loginMemb = (Member)session.getAttribute("loginMember");
-        System.out.println("111" + loginMember);
         
         // 비회원일 경우
         if (loginMemb == null || loginMemb.getMembLevel() < 1) {
@@ -37,8 +36,8 @@
 	<h1>메인 페이지</h1>
 
 	<div>
-		<div><a href="">로그인</a></div>
-		<div><a href="">회원가입</a></div>
+		<div><a href="<%=request.getContextPath()%>/loginForm.jsp">로그인</a></div>
+		<div><a href="<%=request.getContextPath()%>/insertMemberForm.jsp">회원가입</a></div>
 	</div>
 	
 </body>
