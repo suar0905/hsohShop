@@ -10,11 +10,11 @@ import vo.Member;
 
 public class MemberDAO {
     
-    /* 회원가입 - 회원추가 [비회원]
+    /* 회원 - 회원가입 [비회원]
      * input: Member
      * output : int
      */
-    public int insertMember(Member member) throws ClassNotFoundException, SQLException {
+    public int insertMember(Member memb) throws ClassNotFoundException, SQLException {
         int successValue = 0;
 
         // maria db를 사용 및 접속하기 위해 commons 패키지의 DBUtil클래스 사용
@@ -24,14 +24,14 @@ public class MemberDAO {
         // 쿼리문 생성
         String sql = "INSERT INTO member(memb_id, memb_pw, memb_name, memb_age, memb_sex, memb_level, insert_date, modify_date, insert_id, modify_id) VALUES(?,PASSWORD(?),?,?,?,?,NOW(),NOW(),?,?)";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString (1, member.getMembId());
-        stmt.setString (2, member.getMembPw());
-        stmt.setString (3, member.getMembName());
-        stmt.setInt    (4, member.getMembAge());
-        stmt.setString (5, member.getMembSex());
-        stmt.setInt    (6, member.getMembLevel());
-        stmt.setString (7, member.getInsertId());
-        stmt.setString (8, member.getModifyId());
+        stmt.setString (1, memb.getMembId());
+        stmt.setString (2, memb.getMembPw());
+        stmt.setString (3, memb.getMembName());
+        stmt.setInt    (4, memb.getMembAge());
+        stmt.setString (5, memb.getMembSex());
+        stmt.setInt    (6, memb.getMembLevel());
+        stmt.setString (7, memb.getMembId());
+        stmt.setString (8, memb.getMembId());
 
         // 쿼리 실행
         int insertRs = stmt.executeUpdate();
@@ -49,7 +49,7 @@ public class MemberDAO {
         return successValue;
     }
 	
-    /* 회원가입 - 로그인
+    /* 회원 - 로그인
      * input: Member
      * output : Member
      */
@@ -91,5 +91,43 @@ public class MemberDAO {
         
 		return memb;
 	}
+
+    /* 회원 - 회원가입 회원ID 중복체크
+     * input: membDupliCheck
+     * output : int
+     */
+    public int selectMembDupliIdCheck(String membDupliIdCheck) throws ClassNotFoundException, SQLException {
+        int successValue = 0;
+
+        // maria db를 사용 및 접속하기 위해 commons 패키지의 DBUtil클래스 사용
+        DBUtil dbUtil = new DBUtil();
+        Connection conn = dbUtil.getConnection();
+
+        // 쿼리문 생성
+        String sql = "SELECT MEMB_ID AS membId FROM MEMBER WHERE MEMB_ID=?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString (1, membDupliIdCheck);
+
+        ResultSet rs = stmt.executeQuery();
+        
+        String membId = "";
+        
+        // 쿼리 실행
+        if (rs.next()) {
+            membId = rs.getString("membId");
+        }
+        
+        if (!"".equals(membId)) {
+            // 회원ID 중복
+            successValue = 1;
+        }
+        
+        // 기록 종료
+        rs.close();
+        stmt.close();
+        conn.close();
+
+        return successValue;
+    }
 
 }

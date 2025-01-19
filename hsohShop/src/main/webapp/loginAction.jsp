@@ -6,7 +6,7 @@
     //한글 깨짐 방지
     request.setCharacterEncoding("utf-8");
 
-    //* 인증 방어 코드 * 
+    // 인증 방어 코드 
     // 로그인 전(session.getAttribute("loginMember") -> null)에만 페이지 열람 가능하다.
     if (session.getAttribute("loginMember") != null) {
         System.out.println("[debug] 이미 로그인 되어 있습니다.");
