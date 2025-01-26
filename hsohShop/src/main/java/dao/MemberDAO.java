@@ -22,7 +22,7 @@ public class MemberDAO {
         Connection conn = dbUtil.getConnection();
 
         // 쿼리문 생성
-        String sql = "INSERT INTO member(memb_id, memb_pw, memb_name, memb_age, memb_sex, memb_level, insert_date, modify_date, insert_id, modify_id) VALUES(?,PASSWORD(?),?,?,?,?,NOW(),NOW(),?,?)";
+        String sql = "INSERT INTO MEMBER(MEMB_ID, MEMB_PW, MEMB_NAME, MEMB_AGE, MEMB_SEX, MEMB_LEVEL, INSERT_DATE, MODIFY_DATE, INSERT_ID, MODIFY_ID) VALUES(?,PASSWORD(?),?,?,?,?,NOW(),NOW(),?,?)";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString (1, memb.getMembId());
         stmt.setString (2, memb.getMembPw());
@@ -62,7 +62,7 @@ public class MemberDAO {
 
         // 쿼리문 생성
         String sql = "SELECT A.MEMB_NO AS membNo, A.MEMB_ID AS membId, A.MEMB_PW AS membPw, A.MEMB_NAME AS membName, A.MEMB_AGE AS membAge, A.MEMB_SEX AS membSex, A.MEMB_LEVEL AS membLevel, A.INSERT_DATE AS insertDate, A.MODIFY_DATE AS modifyDate, A.INSERT_ID AS insertId, A.MODIFY_ID AS modifyId "
-                + "FROM MEMBER A WHERE A.MEMB_ID=? AND A.MEMB_PW=?";
+                + "FROM MEMBER A WHERE A.MEMB_ID=? AND A.MEMB_PW=PASSWORD(?)";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, member.getMembId());
         stmt.setString(2, member.getMembPw());
@@ -92,7 +92,7 @@ public class MemberDAO {
 		return memb;
 	}
 
-    /* 회원 - 회원가입 회원ID 중복체크
+    /* 회원 - 회원가입시 회원ID 중복체크
      * input: membDupliCheck
      * output : int
      */
