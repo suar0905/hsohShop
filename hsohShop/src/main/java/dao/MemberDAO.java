@@ -4,13 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import commons.DBUtil;
 import vo.Member;
 
 public class MemberDAO {
     
-    /* 회원 - 회원가입 [비회원]
+    /* 비회원 - 회원가입
      * input: Member
      * output : int
      */
@@ -49,7 +50,7 @@ public class MemberDAO {
         return successValue;
     }
 	
-    /* 회원 - 로그인
+    /* 비회원 - 로그인
      * input: Member
      * output : Member
      */
@@ -92,7 +93,7 @@ public class MemberDAO {
 		return memb;
 	}
 
-    /* 회원 - 회원가입시 회원ID 중복체크
+    /* 비회원 - 회원가입시 회원ID 중복체크
      * input: membDupliCheck
      * output : int
      */
@@ -130,4 +131,48 @@ public class MemberDAO {
         return successValue;
     }
 
+    /* 회원/관리자 - 내 정보 상세보기
+     * input: membNo
+     * output : ArrayList
+     */
+    public ArrayList<Member> selectMemberOne(int membNo) throws ClassNotFoundException, SQLException {
+        // maria db를 사용 및 접속하기 위해 commons 패키지의 DBUtil클래스 사용
+        DBUtil dbUtil = new DBUtil();
+        Connection conn = dbUtil.getConnection();
+
+        // 쿼리문 생성
+        String sql = "SELECT A.MEMB_NO AS membNo, A.MEMB_ID AS membId, A.MEMB_PW AS membPw, A.MEMB_NAME AS membName, A.MEMB_AGE AS membAge, A.MEMB_SEX AS membSex, A.MEMB_LEVEL AS membLevel, A.INSERT_DATE AS insertDate, A.MODIFY_DATE AS modifyDate, A.INSERT_ID AS insertId, A.MODIFY_ID AS modifyId "
+                + "FROM MEMBER A WHERE A.MEMB_NO=? ORDER BY A.INSERT_DATE DESC";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt (1, membNo);
+
+        ResultSet rs = stmt.executeQuery();
+        
+        // Member 객체를 지닌 리스트 생성
+     	ArrayList<Member> membList = new ArrayList<Member>();
+        
+        while (rs.next()) {
+        	Member memb = new Member();
+        	memb.setMembNo		(rs.getInt("membNo"));
+        	memb.setMembId		(rs.getString("membId"));
+        	memb.setMembPw		(rs.getString("membPw"));
+        	memb.setMembName	(rs.getString("membName"));
+        	memb.setMembLevel	(rs.getInt("membLevel"));
+        	memb.setMembAge		(rs.getInt("membAge"));
+        	memb.setMembSex		(rs.getString("membSex"));
+        	memb.setInsertId	(rs.getString("insertId"));
+        	memb.setInsertDate	(rs.getTimestamp("insertDate"));
+        	memb.setModifyId	(rs.getString("modifyId"));
+        	memb.setModifyDate	(rs.getTimestamp("modifyDate"));
+        	
+        	membList.add(memb);
+        }
+        
+        // 기록 종료
+        rs.close();
+        stmt.close();
+        conn.close();
+
+        return membList;
+    }
 }

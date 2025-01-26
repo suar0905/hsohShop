@@ -27,15 +27,15 @@
 
 </head>
 <body>
-    <!-- 페이지 상단 메인메뉴 세팅 -->
+    <!-- 페이지 상단 서브메뉴 세팅 -->
     <div>
         <jsp:include page="/partial/subMenu.jsp"></jsp:include>
     </div>
     
     
     <div class="container-sm text-center">
-	    <h1>* 로그인 페이지 *</h1>
-    	<div class="jumbotron">
+	    <h1 style="margin: 3% 0 0 0;">[로그인]</h1>
+    	<div class="jumbotron" style="margin: 1% 0 0 0;">
 		    <form id="loginForm" action="<%=request.getContextPath()%>/loginAction.jsp" method="post">
 		        <div class="form-floating mb-3">
 		        	<input type="text" class="form-control" name="membId" id="membId" placeholder="ID">
@@ -62,10 +62,12 @@
     <script>
         $('#loginBtn').click(function() {
             if ($('#membId').val() == '') {
-                alert('회원ID를 입력해주세요.');
+                alert('회원 아이디를 입력해주세요.');
+                $('#membId').focus();
                 return false;
             } else if ($('#membPw').val() == '') {
-                alert('회원PW를 입력해주세요.');
+                alert('회원 비밀번호를 입력해주세요.');
+                $('#membPw').focus();
                 return false;
             } else {
                 // 로그인 진행

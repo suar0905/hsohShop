@@ -32,11 +32,16 @@
 </head>
 
 <body>
-
+	
+	<!-- 페이지 상단 서브메뉴 세팅 -->
+    <div>
+        <jsp:include page="/partial/subMenu.jsp"></jsp:include>
+    </div>
+	
     <div class="container-sm text-center">
         <div class="jumbotron">
     
-            <h2>* 회원가입 페이지 *</h2>
+            <h2 style="margin: 3% 0 1% 0;">[회원가입]</h2>
 
             <!-- 중복ID Check -->
             <form action="<%=request.getContextPath()%>/membDupliIdCheckAction.jsp" method="post">
@@ -130,6 +135,7 @@
         $('#joinBtn').click(function() {
             if ($('#membPw').val() == '') {
                 alert('비밀번호를 입력하세요');
+                $('#membPw').focus();
                 return;
             }
             
@@ -140,11 +146,13 @@
             
             if ($('#membName').val() == '') {
                 alert('회원명을 입력하세요');
+                $('#membName').focus();
                 return;
             }
             
             if ($('#membAge').val() == '') {
                 alert('회원 나이를 입력하세요');
+                $('#membAge').focus();
                 return;
             }
             
