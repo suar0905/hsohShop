@@ -46,7 +46,7 @@
 				  
 				  	<ul class="dropdown-menu" style="text-align:center;">
 				    	<li><a class="dropdown-item" href="<%=request.getContextPath()%>/logoutAction.jsp">로그아웃</a></li>
-				    	<li><a class="dropdown-item" href="<%=request.getContextPath()%>/selectMemberInfo.jsp">내 정보</a></li>
+				    	<li><a class="dropdown-item" href="<%=request.getContextPath()%>/selectMyInfo.jsp">내 정보</a></li>
 				    	<li><a class="dropdown-item" href="<%=request.getContextPath()%>/selectOrderListByMember.jsp">주문목록</a></li>
 				  	</ul>
 				</div>
