@@ -13,20 +13,27 @@
     <%
         Member loginMemb = (Member)session.getAttribute("loginMember");
         
-        // 비회원일 경우
-        if (loginMemb == null || loginMemb.getMembLevel() < 1) {
+        // 비회원 공통 상단 메뉴
+        if (loginMemb == null) {
     %>
             <div>
                 <jsp:include page="/partial/subMenu.jsp"></jsp:include>
             </div>
     <%
-        // 관리자일 경우
-        } else if (loginMemb != null && loginMemb.getMembLevel() > 0) {
+        // 일반회원 공통 상단 메뉴
+        } else if (loginMemb != null && loginMemb.getMembLevel() < 1) {
     %>
             <div>
-                <jsp:include page="/partial/adminMenu.jsp"></jsp:include>
+                <jsp:include page="/partial/mainMenu.jsp"></jsp:include>
             </div>
     <%
+    	// 관리자 공통 상단 메뉴
+        } else if (loginMemb != null && loginMemb.getMembLevel() > 0) {
+    %>
+    		<div>
+                <jsp:include page="/partial/adminMenu.jsp"></jsp:include>
+            </div>
+    <%    	
         }
     %>
     
