@@ -2,6 +2,7 @@
 <%@ page import="vo.*"%>
 <%@ page import="dao.*"%>
 <%@ page import="java.util.*"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%
     // 한글 깨짐 방지
@@ -112,7 +113,7 @@
 					</tr>
 					<tr>
 						<th>가입날짜</th>
-						<td><%=m.getInsertDate()%></td>
+						<td><fmt:formatDate pattern="yyyy/MM/dd hh:mm:ss" value="<%=m.getInsertDate()%>"/></td>
 					</tr>
 					<tr>
 						<th>수정아이디</th>
@@ -120,7 +121,7 @@
 					</tr>
 					<tr>
 						<th>수정날짜</th>
-						<td><%=m.getModifyDate()%></td>
+						<td><fmt:formatDate pattern="yyyy/MM/dd hh:mm:ss" value="<%=m.getModifyDate()%>"/></td>
 					</tr>
 			<%
 					} else if (m.getMembLevel() == 1) { // 관리자
@@ -164,7 +165,7 @@
 					</tr>
 					<tr>
 						<th>가입날짜</th>
-						<td><%=m.getInsertDate()%></td>
+						<td><fmt:formatDate pattern="yyyy/MM/dd hh:mm:ss" value="<%=m.getInsertDate()%>"/></td>
 					</tr>
 					<tr>
 						<th>수정아이디</th>
@@ -172,7 +173,7 @@
 					</tr>
 					<tr>
 						<th>수정날짜</th>
-						<td><%=m.getModifyDate()%></td>
+						<td><fmt:formatDate pattern="yyyy/MM/dd hh:mm:ss" value="<%=m.getModifyDate()%>"/></td>
 					</tr>
 			<%
 					}

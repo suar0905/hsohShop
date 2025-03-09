@@ -12,8 +12,8 @@ import vo.Member;
 public class MemberDAO {
     
     /* 비회원 - 회원가입
-     * input: Member
-     * output : int
+     * param: memb
+     * return : int
      */
     public int insertMember(Member memb) throws ClassNotFoundException, SQLException {
         int successValue = 0;
@@ -51,8 +51,8 @@ public class MemberDAO {
     }
 	
     /* 비회원 - 로그인
-     * input: Member
-     * output : Member
+     * param: member
+     * return : Member
      */
     public Member login(Member member) throws ClassNotFoundException, SQLException {
         Member memb = null;
@@ -94,8 +94,8 @@ public class MemberDAO {
 	}
 
     /* 비회원 - 회원가입시 회원ID 중복체크
-     * input: membDupliCheck
-     * output : int
+     * param: membDupliIdCheck
+     * return : int
      */
     public int selectMembDupliIdCheck(String membDupliIdCheck) throws ClassNotFoundException, SQLException {
         int successValue = 0;
@@ -132,8 +132,8 @@ public class MemberDAO {
     }
 
     /* 회원/관리자 - 내 정보 상세보기
-     * input: membNo
-     * output : ArrayList
+     * param: membNo
+     * return : ArrayList<Member>
      */
     public ArrayList<Member> selectMemberOne(int membNo) throws ClassNotFoundException, SQLException {
         // maria db를 사용 및 접속하기 위해 commons 패키지의 DBUtil클래스 사용
