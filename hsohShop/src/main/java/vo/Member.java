@@ -1,7 +1,7 @@
 package vo;
 
 public class Member extends Common {
-	// Member테이블 vo
+	// Member테이블
 	private int membNo;
 	private String membId;
 	private String membPw;

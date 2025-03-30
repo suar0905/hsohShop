@@ -69,7 +69,12 @@
 		</h2>
 		<table class="table table-secondary table-bordered" style="text-align:center;" border="1">
 			<%
-				for(Member m : membList) {
+				for (Member m : membList) {
+		    %>
+		    		<form name="pwForm" method="post">
+		    			<input type="hidden" name="membNo" value="<%=m.getMembNo()%>" readonly="readonly">
+		    		</form>
+		    <%
 					// 일반회원
 					if (m.getMembLevel() == 0) {
 						
@@ -182,11 +187,23 @@
 		</table>
 		
 		<div style="text-align:center; margin: 1% 0 0 0;">
-			<a class="btn btn-outline-danger" href="<%=request.getContextPath()%>/updateMemberInfoPwForm.jsp?memberNo=<%=loginMember.getMembNo()%>">비밀번호 수정</a>
+			<button id="pwBtnPop" class="btn btn-outline-danger">비밀번호 수정</button>
 			<a class="btn btn-outline-danger" href="<%=request.getContextPath()%>/deleteMemberInfoForm.jsp?memberNo=<%=loginMember.getMembNo()%>&memberName=<%=loginMember.getMembName()%>">회원탈퇴</a>
 		</div>
 	</div>
 
 </body>
+
+<script>
+	var pwBtnPop = document.getElementById('pwBtnPop');
+	var popAddr = '/popup/pwUpdatePop.jsp';
+	var popName = '비밀번호 변경 팝업';
+	
+	pwBtnPop.addEventListener('click', () => {
+	    window.open(popAddr, popName, 'width=450, height=250, top=150, left=200');
+	    document.pwForm.membNo.value;
+	});
+	
+</script>
 
 </html>

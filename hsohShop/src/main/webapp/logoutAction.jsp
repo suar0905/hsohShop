@@ -4,5 +4,5 @@
 	session.invalidate();
 
 	// 로그아웃 후 메인화면으로 넘김
-	response.sendRedirect(request.getContextPath() + "/index.jsp");
+	response.sendRedirect(request.getContextPath() + "/loginForm.jsp");
 %>

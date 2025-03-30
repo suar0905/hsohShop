@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import commons.DBUtil;
 import vo.Member;
+import vo.MemberVO;
 
 public class MemberDAO {
     
@@ -175,4 +176,77 @@ public class MemberDAO {
 
         return membList;
     }
+    
+    /* 회원/관리자 - 현재 비밀번호 확인
+     * param: member
+     * return : int
+     */
+    public int selectMembPwCheck(Member member) throws ClassNotFoundException, SQLException {
+        int successValue = 0;
+
+        // maria db를 사용 및 접속하기 위해 commons 패키지의 DBUtil클래스 사용
+        DBUtil dbUtil = new DBUtil();
+        Connection conn = dbUtil.getConnection();
+
+        // 쿼리문 생성
+        String sql = "SELECT MEMB_ID AS membId FROM MEMBER WHERE MEMB_NO=? AND MEMB_PW = PASSWORD(?)";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, member.getMembNo());
+        stmt.setString(2, member.getMembPw());
+
+        ResultSet rs = stmt.executeQuery();
+        
+        // 쿼리 실행
+        if (rs.next()) {
+        	if (!"".equals(rs.getString("membId")) && rs.getString("membId") != null) {
+        		successValue = 1;
+        	} else {
+        		successValue = 0;
+        	}
+        }
+        
+        // 기록 종료
+        rs.close();
+        stmt.close();
+        conn.close();
+
+        return successValue;
+    }
+    
+    /* 회원/관리자 - 비밀번호 수정
+     * param: memb
+     * return : void
+     */
+ 	public int updatePwInfo(MemberVO memb) throws ClassNotFoundException, SQLException {
+        
+ 		int successValue = 0;
+ 		
+ 		// maria db를 사용 및 접속하기 위해 commons 패키지의 DBUtil클래스 사용
+        DBUtil dbUtil = new DBUtil();
+        Connection conn = dbUtil.getConnection();
+ 		
+ 		// 쿼리 생성
+ 		String sql = "UPDATE MEMBER SET MEMB_PW=PASSWORD(?) WHERE MEMB_NO=? AND MEMB_PW=PASSWORD(?)";
+ 		PreparedStatement stmt = conn.prepareStatement(sql);
+ 		stmt.setString(1, memb.getNewMembPw());
+ 		stmt.setInt(2, memb.getMembNo());
+ 		stmt.setString(3, memb.getMembPw());
+ 		
+ 		// 쿼리 실행
+ 		int updateRs = stmt.executeUpdate();
+        if (updateRs != 0) {
+            System.out.println("[debug] 비밀번호 수정 성공 -> " + updateRs);
+            successValue = 1;
+        } else {
+            System.out.println("[debug] 비밀번호 수정 실패 -> " + updateRs);
+            successValue = 0;
+        }
+ 		
+ 		// 기록 종료
+ 		stmt.close();
+ 		conn.close();
+ 		
+ 		return successValue;
+	 }
+    
 }
